@@ -1,28 +1,8 @@
 import React from "react";
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-  Font,
-} from "@react-pdf/renderer";
+import { Page, Text, View, Document } from "@react-pdf/renderer";
 import { createTw } from "react-pdf-tailwind";
 
 import ReactPDF from "@react-pdf/renderer";
-
-// Create styles
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: "row",
-    backgroundColor: "#E4E4E4",
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-});
 
 const tw = createTw({
   theme: {
@@ -34,7 +14,6 @@ const tw = createTw({
   },
 });
 
-// Create Document Component
 const Resume = () => (
   <Document>
     <Page size="A4" style={tw("p-16")}>
@@ -117,11 +96,49 @@ const Resume = () => (
             <Text style={tw("text-sm pt-1")}>- Game Development</Text>
             <View style={tw("ml-4")}>
               <Text style={tw("text-xs text-gray-600")}>
-                - Proficient in Godot. Minimal experience in Unreal Engine and
-                Unity.
+                - Experience with Godot, Unreal Engine and Unity.
               </Text>
               <Text style={tw("pt-1 text-xs text-gray-600")}>
                 - Proficient in C++
+              </Text>
+              <Text style={tw("pt-1 text-xs text-gray-600")}>
+                - Proficient in Java
+              </Text>
+              <View style={tw("ml-4")}>
+                <Text style={tw("mt-1 text-xs text-gray-600")}>
+                  - Used to create Minecraft server plugins for fun and for pay
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={tw("mt-8")}>
+        <Text style={tw("text-base text-purple-500")}>Projects</Text>
+        <View style={tw("ml-4")}>
+          <View style={tw("flex flex-row justify-between items-baseline")}>
+            <Text style={tw("text-sm")}>Game Development</Text>
+          </View>
+          <View style={tw("ml-4")}>
+            <Text style={tw("text-sm")}>- Single player cat platformer</Text>
+            <View style={tw("ml-4")}>
+              <Text style={tw("text-xs text-gray-600")}>Meow</Text>
+            </View>
+          </View>
+          <View style={tw("flex flex-row justify-between items-baseline pt-2")}>
+            <Text style={tw("text-sm")}>Web Development</Text>
+          </View>
+          <View style={tw("ml-4")}>
+            <Text style={tw("text-sm")}>- TradeFrog</Text>
+            <View style={tw("ml-4")}>
+              <Text style={tw("text-xs text-gray-600")}>
+                An options trading journaling web application.
+              </Text>
+            </View>
+            <Text style={tw("text-sm mt-1")}>- Let's Play Music</Text>
+            <View style={tw("ml-4")}>
+              <Text style={tw("text-xs text-gray-600")}>
+                A webapp to connect music teachers to students.
               </Text>
             </View>
           </View>
