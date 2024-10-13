@@ -1,22 +1,215 @@
 import React from "react";
-import { Page, Text, View, Document } from "@react-pdf/renderer";
+import { Page, Text, View, Document, Font } from "@react-pdf/renderer";
 import { createTw } from "react-pdf-tailwind";
-
 import ReactPDF from "@react-pdf/renderer";
+
+const experienceSubsections = [
+  {
+    title: "Repact",
+    range: "2022-2024",
+    subsections: [
+      {
+        title: "Software Engineer: Jan 2023 - present",
+        items: [
+          "Integrated Stripe API for payment processing to facilitate customer self-sign-up.",
+          "Architected and managed on-premise data servers.",
+          "Mentored and assisted coworkers with Node.js, React, and linux.",
+        ],
+      },
+      {
+        title: "Junior Software Engineer: May 2022 - Jan 2023",
+        items: [
+          "Wrote and maintained systems for customer data acquisition.",
+          "Used Jira for sprint tracking and planning.",
+        ],
+      },
+    ],
+  },
+  {
+    title: "Nascent Labs",
+    range: "2021-2022",
+    subsections: [
+      {
+        title: "Software Engineer Intern: Sept 2021 - May 2022",
+        items: [
+          "Received hands-on experience writing customer-facing features and applications.",
+          "Used Git and Bitbucket to collaborate with other engineers.",
+          "Learned the software development life cycle.",
+          "Learned about and implemented software development best practices, including CI/CD.",
+        ],
+      },
+    ],
+  },
+];
+
+const skillsSubsections = [
+  {
+    title: "Programming",
+    subsections: [
+      {
+        title: "Web Development",
+        items: [
+          "Proficient in full-stack Javascript; front-end using React, along with back-end using node.js",
+          "HTML and CSS",
+        ],
+      },
+      {
+        title: "Mobile Development",
+        items: ["Proficient in React Native", "Proficient in SwiftUI"],
+      },
+      {
+        title: "Game Development",
+        items: [
+          "Experience with Godot, Unreal Engine and Unity.",
+          "Proficient in C++",
+          "Proficient in Java",
+        ],
+      },
+    ],
+  },
+  {
+    title: "Dev Ops",
+    subsections: [
+      {
+        title: "AWS",
+        items: [
+          "Proficient with using Lambda and S3 to host react websites",
+          "Proficient with AWS CDK, Serverless Stack (SST), and Serverless Framework to write infrastructure as code",
+          "AWS Certified Cloud Practitioner",
+        ],
+      },
+      {
+        title: "Linux",
+        items: [
+          "Experience configuring Linux at a low level",
+          "Wrote linux startup scripts",
+          "Wrote a system configuration script to allow for fast spin up of new servers",
+        ],
+      },
+    ],
+  },
+];
+
+const projectSubsections = [
+  {
+    title: "Game Development",
+    subsections: [
+      {
+        title: "Single Player Cat Platformer",
+        items: ["A self-made Godot cat platforming game."],
+      },
+      {
+        title: "Minecraft mods and plugins",
+        items: [
+          "Used Java to build Minecraft server plugins for myself and for pay.",
+        ],
+      },
+    ],
+  },
+  {
+    title: "App Development",
+    subsections: [
+      {
+        title: "TradeFrog",
+        items: ["An options trading journaling web application."],
+      },
+      {
+        title: "Lets Play Music",
+        items: ["A mobile app to connect music teachers to students."],
+      },
+    ],
+  },
+];
+
+Font.register({
+  family: "Mononoki",
+  fonts: [
+    { src: "./fonts/mononoki-Regular.ttf" },
+    { src: "./fonts/mononoki-Bold.ttf", fontWeight: "bold" },
+    { src: "./fonts/mononoki-Italic.ttf", fontStyle: "italic" },
+  ],
+});
+
+Font.register({
+  family: "Jetbrains",
+  fonts: [
+    { src: "./fonts/jetbrains/JetBrainsMono-Regular.ttf" },
+    { src: "./fonts/jetbrains/JetBrainsMono-Bold.ttf", fontWeight: "bold" },
+    { src: "./fonts/jetbrains/JetBrainsMono-Light.ttf", fontWeight: "light" },
+    { src: "./fonts/jetbrains/JetBrainsMono-Italic.ttf", fontStyle: "italic" },
+  ],
+});
 
 const tw = createTw({
   theme: {
-    extend: {
-      colors: {
-        custom: "#bada55",
-      },
+    fontFamily: {
+      sans: ["Helvetica"],
+      mononoki: ["Mononoki"],
+      jetbrains: ["Jetbrains"],
     },
   },
 });
 
+const SimpleSection = ({ title, subtitle, range }) => {
+  return (
+    <View style={tw("mt-6")}>
+      <Text style={tw("text-base text-purple-500")}>{title}</Text>
+      <View style={tw("ml-4")}>
+        <View style={tw("flex flex-row justify-between items-baseline")}>
+          <Text style={tw("text-sm")}>{subtitle}</Text>
+          <Text style={tw("text-sm")}>{range}</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const Section = ({ title, subsections }) => {
+  const subItemSectionItems = (subsection, index) => (
+    <>
+      <Text style={tw(`font-bold text-xs${index == 0 ? "" : " pt-2"} pb-0.5`)}>
+        {subsection.title}
+      </Text>
+      <View style={tw("ml-4")}>
+        {subsection.items?.map((subitem, index) => (
+          <Text style={tw(`text-xs text-gray-600${index == 0 ? "" : " pt-1"}`)}>
+            - {subitem}
+          </Text>
+        ))}
+      </View>
+    </>
+  );
+
+  const subsectionsItems = subsections?.map((item, index) => (
+    <>
+      <View
+        key={item.title}
+        style={tw(
+          `flex flex-row justify-between items-baseline${
+            index == 0 ? "" : " pt-2"
+          }`
+        )}
+      >
+        <Text style={tw("text-sm")}>{item.title}</Text>
+        <Text style={tw("text-sm")}>{item.range}</Text>
+      </View>
+      <View style={tw("ml-4")}>
+        {item.subsections.map(subItemSectionItems)}
+      </View>
+    </>
+  ));
+
+  return (
+    <View style={tw("mt-6")}>
+      <Text style={tw("text-base text-purple-500")}>{title}</Text>
+      <View style={tw("ml-4")}>{subsectionsItems}</View>
+    </View>
+  );
+};
+
 const Resume = () => (
   <Document>
-    <Page size="A4" style={tw("p-16")}>
+    <Page size="A4" style={tw("p-14 pt-6 pb-6 font-jetbrains")}>
       <View>
         <Text style={tw("text-purple-500")}>Crew Bindrup</Text>
         <View style={tw("flex items-baseline justify-between flex-row")}>
@@ -28,121 +221,18 @@ const Resume = () => (
           <Text style={tw("pt-1 text-xs")}>crewbindrup@gmail.com</Text>
         </View>
       </View>
-      <View style={tw("mt-8")}>
-        <Text style={tw("text-base text-purple-500")}>Experience</Text>
-        <View style={tw("ml-4")}>
-          <View style={tw("flex flex-row justify-between items-baseline")}>
-            <Text style={tw("text-sm")}>Repact</Text>
-            <Text style={tw("text-sm")}>2022-2024</Text>
-          </View>
-          <View style={tw("ml-4")}>
-            <Text style={tw("text-sm")}>
-              - Software Engineer: Jan 2023 - present
-            </Text>
-            <View style={tw("ml-4")}>
-              <Text style={tw("text-xs text-gray-600")}>- I wrote code.</Text>
-            </View>
-            <Text style={tw("text-sm pt-1")}>
-              - Junior Software Engineer: May 2022 - Jan 2023
-            </Text>
-            <View style={tw("ml-4")}>
-              <Text style={tw("text-xs text-gray-600")}>- I wrote code.</Text>
-            </View>
-          </View>
-        </View>
-        <View style={tw("ml-4 mt-4")}>
-          <View style={tw("flex flex-row justify-between items-baseline")}>
-            <Text style={tw("text-sm")}>Nascent Labs</Text>
-            <Text style={tw("text-sm")}>2021-2022</Text>
-          </View>
-          <View style={tw("ml-4")}>
-            <Text style={tw("text-sm")}>
-              - Software Engineer Intern: Sept 2021 - May 2022
-            </Text>
-            <View style={tw("ml-4")}>
-              <Text style={tw("text-xs text-gray-600")}>- I wrote code.</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View style={tw("mt-8")}>
-        <Text style={tw("text-base text-purple-500")}>Education</Text>
-        <View style={tw("ml-4")}>
-          <View style={tw("flex flex-row justify-between items-baseline")}>
-            <Text style={tw("text-sm")}>
-              B.S. IN COMPUTER SCIENCE, UTAH TECH UNIVERSITY
-            </Text>
-            <Text style={tw("text-sm")}>2026 (expected)</Text>
-          </View>
-        </View>
-      </View>
-      <View style={tw("mt-8")}>
-        <Text style={tw("text-base text-purple-500")}>Skills</Text>
-        <View style={tw("ml-4")}>
-          <View style={tw("flex flex-row justify-between items-baseline")}>
-            <Text style={tw("text-sm")}>Programming</Text>
-          </View>
-          <View style={tw("ml-4")}>
-            <Text style={tw("text-sm")}>- Web Development</Text>
-            <View style={tw("ml-4")}>
-              <Text style={tw("text-xs text-gray-600")}>
-                - Proficient in full-stack Javascript; front-end using React,
-                along with node.js
-              </Text>
-              <Text style={tw("pt-1 text-xs text-gray-600")}>
-                - HTML and CSS
-              </Text>
-            </View>
-            <Text style={tw("text-sm pt-1")}>- Game Development</Text>
-            <View style={tw("ml-4")}>
-              <Text style={tw("text-xs text-gray-600")}>
-                - Experience with Godot, Unreal Engine and Unity.
-              </Text>
-              <Text style={tw("pt-1 text-xs text-gray-600")}>
-                - Proficient in C++
-              </Text>
-              <Text style={tw("pt-1 text-xs text-gray-600")}>
-                - Proficient in Java
-              </Text>
-              <View style={tw("ml-4")}>
-                <Text style={tw("mt-1 text-xs text-gray-600")}>
-                  - Used to create Minecraft server plugins for fun and for pay
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View style={tw("mt-8")}>
-        <Text style={tw("text-base text-purple-500")}>Projects</Text>
-        <View style={tw("ml-4")}>
-          <View style={tw("flex flex-row justify-between items-baseline")}>
-            <Text style={tw("text-sm")}>Game Development</Text>
-          </View>
-          <View style={tw("ml-4")}>
-            <Text style={tw("text-sm")}>- Single player cat platformer</Text>
-            <View style={tw("ml-4")}>
-              <Text style={tw("text-xs text-gray-600")}>Meow</Text>
-            </View>
-          </View>
-          <View style={tw("flex flex-row justify-between items-baseline pt-2")}>
-            <Text style={tw("text-sm")}>Web Development</Text>
-          </View>
-          <View style={tw("ml-4")}>
-            <Text style={tw("text-sm")}>- TradeFrog</Text>
-            <View style={tw("ml-4")}>
-              <Text style={tw("text-xs text-gray-600")}>
-                An options trading journaling web application.
-              </Text>
-            </View>
-            <Text style={tw("text-sm mt-1")}>- Let's Play Music</Text>
-            <View style={tw("ml-4")}>
-              <Text style={tw("text-xs text-gray-600")}>
-                A webapp to connect music teachers to students.
-              </Text>
-            </View>
-          </View>
-        </View>
+      <Section title="Experience" subsections={experienceSubsections} />
+      <SimpleSection
+        title="Education"
+        subtitle={"B.S. Computer Science, Utah Tech University"}
+        range={"2026 (expected)"}
+      />
+      <Section title="Skills" subsections={skillsSubsections} />
+      <Section title="Projects" subsections={projectSubsections} />
+      <View style={tw("absolute bottom-4 right-6 text-neutral-300")}>
+        <Text style={tw("text-xs")}>
+          Created with react-pdf: https://github.com/crewbindrup/resume
+        </Text>
       </View>
     </Page>
   </Document>
