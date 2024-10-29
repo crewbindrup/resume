@@ -95,10 +95,6 @@ const projectSubsections = [
     title: "Game Development",
     subsections: [
       {
-        title: "Single Player Cat Platformer",
-        items: ["A self-made Godot cat platforming game."],
-      },
-      {
         title: "Minecraft mods and plugins",
         items: [
           "Used Java to build Minecraft server plugins for myself and for pay.",
@@ -111,10 +107,11 @@ const projectSubsections = [
     subsections: [
       {
         title: "TradeFrog",
+        range: "In progress",
         items: ["An options trading journaling web application."],
       },
       {
-        title: "Lets Play Music",
+        title: "Let's Play Music",
         items: ["A mobile app to connect music teachers to students."],
       },
     ],
@@ -167,9 +164,16 @@ const SimpleSection = ({ title, subtitle, range }) => {
 const Section = ({ title, subsections }) => {
   const subItemSectionItems = (subsection, index) => (
     <>
-      <Text style={tw(`font-bold text-xs${index == 0 ? "" : " pt-2"} pb-0.5`)}>
-        {subsection.title}
-      </Text>
+      <View
+        style={tw(
+          `flex flex-row justify-between items-baseline pb-0.5${
+            index == 0 ? "" : " pt-2"
+          }`
+        )}
+      >
+        <Text style={tw(`font-bold text-xs`)}>{subsection.title}</Text>
+        <Text style={tw(`text-xs`)}>{subsection.range}</Text>
+      </View>
       <View style={tw("ml-4")}>
         {subsection.items?.map((subitem, index) => (
           <Text style={tw(`text-xs text-gray-600${index == 0 ? "" : " pt-1"}`)}>
