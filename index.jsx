@@ -5,13 +5,24 @@ import ReactPDF from "@react-pdf/renderer";
 
 const experienceSubsections = [
   {
-    title: "Repact",
-    range: "2022-2024",
+    title: "Zaymo",
+    range: "2025-present",
     subsections: [
       {
-        title: "Software Engineer: Jan 2023 - present",
+        title: "Software Engineer Intern: Oct 2025 - present",
+        items: ["Implemented feature requests from customers."],
+      },
+    ],
+  },
+  {
+    title: "Repact",
+    range: "2022-2025",
+    subsections: [
+      {
+        title: "Software Engineer: Jan 2023 - Oct 2025",
         items: [
           "Integrated Stripe API for payment processing to facilitate customer self-sign-up.",
+          "Implemented data analytics across the platform.",
           "Architected and managed on-premise data servers.",
           "Mentored and assisted coworkers with Node.js, React, and linux.",
         ],
@@ -35,7 +46,6 @@ const experienceSubsections = [
           "Received hands-on experience writing customer-facing features and applications.",
           "Used Git and Bitbucket to collaborate with other engineers.",
           "Learned the software development life cycle.",
-          "Learned about and implemented software development best practices, including CI/CD.",
         ],
       },
     ],
@@ -74,7 +84,7 @@ const skillsSubsections = [
         title: "AWS",
         items: [
           "Proficient with using Lambda and S3 to host react websites",
-          "Proficient with AWS CDK, Serverless Stack (SST), and Serverless Framework to write infrastructure as code",
+          "Proficient with AWS CDK, Serverless Stack (SST), and Serverless Framework to write infrastructure as code.",
           "AWS Certified Cloud Practitioner",
         ],
       },
@@ -95,24 +105,16 @@ const projectSubsections = [
     title: "Game Development",
     subsections: [
       {
+        title: "Unity development in C#",
+        items: [
+          "Build video games during a Game Development class while at Utah Tech",
+        ],
+      },
+      {
         title: "Minecraft mods and plugins",
         items: [
           "Used Java to build Minecraft server plugins for myself and for pay.",
         ],
-      },
-    ],
-  },
-  {
-    title: "App Development",
-    subsections: [
-      {
-        title: "TradeFrog",
-        range: "In progress",
-        items: ["An options trading journaling web application."],
-      },
-      {
-        title: "Let's Play Music",
-        items: ["A mobile app to connect music teachers to students."],
       },
     ],
   },
@@ -229,7 +231,7 @@ const Resume = () => (
       <SimpleSection
         title="Education"
         subtitle={"B.S. Computer Science, Utah Tech University"}
-        range={"2026 (expected)"}
+        range={"2027 (expected)"}
       />
       <Section title="Skills" subsections={skillsSubsections} />
       <Section title="Projects" subsections={projectSubsections} />
